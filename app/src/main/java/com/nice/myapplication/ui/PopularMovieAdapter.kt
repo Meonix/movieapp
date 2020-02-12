@@ -24,6 +24,10 @@ import com.squareup.picasso.Picasso
         return popularMovieList.size
     }
 
+        override fun getItemId(position: Int): Long {
+            return super.getItemId(position)
+        }
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listPopularMovie= popularMovieList[position]
         holder.tvPopularMovie.text = listPopularMovie.originalTitle

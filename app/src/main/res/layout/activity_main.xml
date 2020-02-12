@@ -23,21 +23,37 @@
             android:layout_below="@id/appbar"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tvStatusOfMovie"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/rvPopularMovie"
+                app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/trending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/tvStatusOfMovie"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/mainProgressBar"
                 android:layout_below="@+id/tvStatusOfMovie"
                 android:id="@+id/rvPopularMovie"
                 android:orientation="horizontal"
                 android:layout_height="wrap_content"/>
-        </RelativeLayout>
+            <ProgressBar
+                app:layout_constraintStart_toEndOf="@id/rvPopularMovie"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/mainProgressBar"
+                android:layout_width="49dp"
+                android:visibility="invisible"
+                android:layout_height="match_parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         </ScrollView>
     </RelativeLayout>
