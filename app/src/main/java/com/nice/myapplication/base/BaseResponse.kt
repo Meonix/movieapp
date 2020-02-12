@@ -1,5 +1,7 @@
 package com.nice.app_ex.domain.base
 
+import com.nice.myapplication.model.ListPopularMovie
+
 
 inline fun <T:Any> Response<T>.onLoading(action: (Status) -> Unit):Response<T>{
     if (this is Response) action(status)
@@ -27,7 +29,7 @@ data class Response<out T>(val status: Status, val data: T?, val error: Response
         fun <T> loading(data: T? = null): Response<T>{
             return Response(Status.LOADING, data, null)
         }
-        fun <T> success(data: T?): Response<T>{
+        fun <T> success(data: T?): Response<T> {
             return Response(Status.SUCCESS, data, null)
         }
         fun <T> error(error: ResponseError?): Response<T>{

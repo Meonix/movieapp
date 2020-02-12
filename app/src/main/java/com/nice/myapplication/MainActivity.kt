@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         myViewModel.getMovie()
-        myViewModel.getListPopularMovie()
+        myViewModel.getListPopularMovie(2)
         val recyclerView = findViewById<RecyclerView>(R.id.rvPopularMovie)
         val linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL

@@ -34,8 +34,8 @@ class MainViewModel (private val mMovieRepo:MovieRepo,private val mListPopularMo
 
     private val _getData1 = MutableLiveData<ListPopularMovie>()
     val getData1: LiveData<ListPopularMovie> get() = _getData1
-    fun getListPopularMovie() = executeUseCase {
-        mListPopularMovie.getPoppularMovie()
+    fun getListPopularMovie(page: Int) = executeUseCase {
+        mListPopularMovie.getPoppularMovie(page)
             .onLoading {
                 println("Loading $it")
             }
