@@ -13,8 +13,9 @@ import com.nice.myapplication.model.Result
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.picasso.OkHttpDownloader
 import com.squareup.picasso.Picasso
+import org.w3c.dom.Text
 
-    class PopularMovieAdapter(private val popularMovieList: MutableList<Result>,val context: Context) :RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>(){
+class PopularMovieAdapter(private val popularMovieList: MutableList<Result>,val context: Context) :RecyclerView.Adapter<PopularMovieAdapter.ViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_main_layout,parent,false)
         return ViewHolder(v)
@@ -31,6 +32,7 @@ import com.squareup.picasso.Picasso
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val listPopularMovie= popularMovieList[position]
         holder.tvPopularMovie.text = listPopularMovie.originalTitle
+        holder.tvVoteAverage.text = listPopularMovie.voteAverage.toString()
 
         val moviePosterURL = POSTER_BASE_URL + listPopularMovie.posterPath
 
@@ -48,5 +50,6 @@ import com.squareup.picasso.Picasso
     class ViewHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
             val tvPopularMovie = itemView.findViewById(R.id.tvMovie) as TextView
             val ivPopularMovie =itemView.findViewById(R.id.ivPopularMovie) as ImageView
+            val tvVoteAverage = itemView.findViewById(R.id.tvVoteAverage) as TextView
     }
 }

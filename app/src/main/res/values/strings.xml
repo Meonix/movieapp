@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">moviebase</string>
+    <string name="app_name">Mionix Movie Base</string>
     <string name="movies">Movies</string>
     <string name="trending">Trending</string>
 </resources>

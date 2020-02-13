@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             progressBar.visibility = View.GONE
 
             isLoading = true
-        }, 1000)
+        }, 1200)
 
 
     }

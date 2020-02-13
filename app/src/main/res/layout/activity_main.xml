@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
     <RelativeLayout
         android:layout_width="match_parent"
+        android:background="@color/colorPrimary"
         android:layout_height="match_parent">
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -28,10 +29,14 @@
             android:layout_height="wrap_content">
             <TextView
                 android:id="@+id/tvStatusOfMovie"
+                android:textColor="#ffffff"
+                android:textStyle="bold"
+                android:textSize="20dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/rvPopularMovie"
                 app:layout_constraintTop_toTopOf="parent"
                 android:text="@string/trending"
+                android:layout_marginStart="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
             <androidx.recyclerview.widget.RecyclerView
@@ -50,8 +55,9 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:id="@+id/mainProgressBar"
-                android:layout_width="49dp"
-                android:visibility="invisible"
+                android:background="@drawable/progress_bar"
+                android:layout_width="wrap_content"
+                android:visibility="gone"
                 android:layout_height="match_parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
