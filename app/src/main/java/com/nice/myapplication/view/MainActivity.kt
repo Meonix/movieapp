@@ -1,6 +1,5 @@
-package com.nice.myapplication
+package com.nice.myapplication.view
 
-import android.app.ProgressDialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -9,8 +8,10 @@ import android.widget.ProgressBar
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.nice.myapplication.viewModel.MainViewModel
+import com.nice.myapplication.R
 import com.nice.myapplication.model.Result
-import com.nice.myapplication.ui.PopularMovieAdapter
+import com.nice.myapplication.view.adapter.PopularMovieAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             list.addAll(it.results)
             recyclerView.adapter!!.notifyDataSetChanged()
         })
-        adapterView = PopularMovieAdapter(list,this)
+        adapterView = PopularMovieAdapter(this@MainActivity,list, this)
         limit = adapterView.itemCount
         recyclerView.adapter = adapterView
 

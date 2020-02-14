@@ -1,4 +1,4 @@
-package com.nice.myapplication
+package com.nice.myapplication.viewModel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,8 +17,8 @@ class MainViewModel (private val mMovieRepo:MovieRepo,private val mListPopularMo
 
     val getData:LiveData<Movie> get() = _getData
 
-     fun getMovie() = executeUseCase {
-         mMovieRepo.getMovie()
+     fun getMovie(movie_id: Int) = executeUseCase {
+         mMovieRepo.getMovie(movie_id)
             .onLoading {
                 println("Loading $it")
             }

@@ -8,10 +8,10 @@ import com.nice.myapplication.model.Movie
 
 class MovieRepo (private val mApi: Api){
 
-    suspend fun getMovie(): Response<Movie>{
+    suspend fun getMovie(movie_id: Int): Response<Movie>{
 //       Response.loading(null)
         return try {
-            Response.success(mApi.getMovie())
+            Response.success(mApi.getMovie(movie_id))
         } catch (ex:Exception) {
             Response.error(ResponseError(101,ex.message.toString()))
         }
