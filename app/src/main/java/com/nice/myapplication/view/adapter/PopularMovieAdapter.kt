@@ -61,7 +61,7 @@ class PopularMovieAdapter(private val activity:Activity,private val popularMovie
         picasso = Picasso.Builder(context)
             .downloader(OkHttpDownloader(okHttpClient))
             .build()
-        picasso.load(moviePosterURL).placeholder(R.drawable.loading).into(holder.ivPopularMovie)
+        picasso.load(moviePosterURL).into(holder.ivPopularMovie)
         //
     }
 

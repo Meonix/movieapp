@@ -30,7 +30,7 @@ class SlidePagerAdapter(context: Context,list: MutableList<String>) : PagerAdapt
         picasso = Picasso.Builder(mContext)
             .downloader(OkHttpDownloader(okHttpClient))
             .build()
-        picasso.load(mList[position]).placeholder(R.drawable.loading).into(slideImage)
+        picasso.load(mList[position]).into(slideImage)
 
 
         container.addView(slideLayout)

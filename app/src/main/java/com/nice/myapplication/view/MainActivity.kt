@@ -76,16 +76,9 @@ class MainActivity : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
         Handler().postDelayed({
                 myViewModel.getListPopularMovie(page)
-                myViewModel.getData1.observe(this, Observer {
-//                recyclerView.adapter!!.notifyDataSetChanged()
-                })
-//                adapterView.notifyDataSetChanged()
-//                recyclerView.adapter = adapterView
             progressBar.visibility = View.GONE
 
             isLoading = true
         }, 1200)
-
-
     }
 }

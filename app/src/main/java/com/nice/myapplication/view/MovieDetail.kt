@@ -17,8 +17,10 @@ import com.nice.myapplication.viewModel.MainViewModel
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.picasso.OkHttpDownloader
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_movie_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.Console
+import kotlin.concurrent.fixedRateTimer
 
 class MovieDetail : AppCompatActivity() {
     private val myViewModel : MainViewModel by viewModel()
@@ -45,6 +47,7 @@ class MovieDetail : AppCompatActivity() {
         slidePager = findViewById(R.id.vpMovieDetail)
         tv = findViewById(R.id.tvTitleMovieDetail)
         iv = findViewById(R.id.ivMovieDetail)
+
     }
     private fun setupViewModel(movie_id : String){
         myViewModel.getMovie(movie_id.toInt())
@@ -57,12 +60,25 @@ class MovieDetail : AppCompatActivity() {
             picasso = Picasso.Builder(applicationContext)
                 .downloader(OkHttpDownloader(okHttpClient))
                 .build()
-            picasso.load(poster_path).placeholder(R.drawable.loading).into(iv)
+            picasso.load(poster_path).into(iv)
             listSlides.add(POSTER_BASE_URL + it.backdrop_path)
             listSlides.add(POSTER_BASE_URL + it.backdrop_path)
             listSlides.add(POSTER_BASE_URL + it.backdrop_path)
             slidePagerAdapter = SlidePagerAdapter(this,listSlides)
             slidePager.adapter = slidePagerAdapter
+
+            tlMovieDetail.setupWithViewPager(slidePager,true)
+            fixedRateTimer(name = "timer",initialDelay = 4000,period = 6000){
+              runOnUiThread {
+                  if(slidePager.currentItem < listSlides.count() - 1){
+                      slidePager.currentItem = slidePager.currentItem+1
+                  }
+                  else {
+                      slidePager.currentItem = 0
+                  }
+              }
+            }
         })
+
     }
 }
