@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
     private fun setupViewModel() {
         myViewModel.getListPopularMovie(page)
-        myViewModel.getData1.observe(this, Observer {
+        myViewModel.getListPopularMovie.observe(this, Observer {
             list.addAll(it.results)
             recyclerView.adapter!!.notifyDataSetChanged()
         })
