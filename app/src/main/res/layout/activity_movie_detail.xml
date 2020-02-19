@@ -18,7 +18,8 @@
             android:id="@+id/ctMovieDetail"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
             app:contentScrim="@color/colorPrimary"
-            app:expandedTitleGravity="center|bottom|end"
+            app:expandedTitleGravity="center|end|bottom"
+            app:expandedTitleMarginBottom="50dp"
             app:title="@string/app_name"
             >
             <LinearLayout
@@ -37,7 +38,6 @@
                     android:id="@+id/tlMovieDetail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
                     app:tabBackground="@drawable/indication_item"
                     app:tabGravity="center"
                     app:tabIndicatorHeight="0dp" />
@@ -56,7 +56,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"/>
-
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
     <androidx.core.widget.NestedScrollView
@@ -68,7 +67,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/cardview_light_background"
-                android:textSize="20sp"
+                android:textSize="15sp"
                 android:lineSpacingExtra="8sp"
                 android:padding="16dp"
                 />

@@ -3,7 +3,7 @@ package com.nice.myapplication.model
 
 import com.google.gson.annotations.SerializedName
 
-data class ListPopularMovie(
+data class ListMovie(
     val page: Int,
     val results: List<Result>,
     @SerializedName("total_pages")

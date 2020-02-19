@@ -1,7 +1,5 @@
 package com.nice.app_ex.domain.base
 
-import com.nice.myapplication.model.ListPopularMovie
-
 
 inline fun <T:Any> Response<T>.onLoading(action: (Status) -> Unit):Response<T>{
     if (this is Response) action(status)

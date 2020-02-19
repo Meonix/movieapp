@@ -5,10 +5,10 @@ import com.nice.app_ex.domain.base.Response
 import com.nice.app_ex.domain.base.ResponseError
 import com.nice.myapplication.model.ListMovie
 
-class ListPopularMovieRepo(private val mApi: Api) {
-    suspend fun getPoppularMovie(page :Int): Response<ListMovie> {
+class ListUpComingMovieRepo(private val mApi: Api) {
+    suspend fun getUpComingMovie(page :Int): Response<ListMovie> {
         return try {
-            Response.success(mApi.getPoppularMovie(page))
+            Response.success(mApi.getUpComingMovie(page))
         } catch (ex:Exception) {
             Response.error(ResponseError(101,ex.message.toString()))
         }

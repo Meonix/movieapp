@@ -12,19 +12,28 @@ import com.nice.myapplication.viewModel.MainViewModel
 import com.nice.myapplication.R
 import com.nice.myapplication.model.Result
 import com.nice.myapplication.view.adapter.PopularMovieAdapter
+import com.nice.myapplication.view.adapter.UpComingMovieAdapter
+import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class MainActivity : AppCompatActivity() {
-    private var page = 1
-    private var isLoading = true
-    private var limit : Int?= 0
+    private var pagePopular = 1
+    private var pageUpcoming = 1
+    private var popularIsLoading = true
+    private var upComingIsLoading = true
     private lateinit var progressBar : ProgressBar
     private val myViewModel : MainViewModel by viewModel()
     private lateinit var recyclerView: RecyclerView
+    private lateinit var recyclerViewUpcoming: RecyclerView
     private lateinit var linearLayoutManager: LinearLayoutManager
-    private lateinit var adapterView : PopularMovieAdapter
-    private val list :MutableList<Result> = mutableListOf()
+    private lateinit var linearLayoutManager1: LinearLayoutManager
+
+    private lateinit var adapterPopularMovieView : PopularMovieAdapter
+    private lateinit var adapterUpcomingMovieView : UpComingMovieAdapter
+
+    private val listPupularMovie :MutableList<Result> = mutableListOf()
+    private val listUpcomingMovie :MutableList<Result> = mutableListOf()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,23 +42,31 @@ class MainActivity : AppCompatActivity() {
     }
     private fun initView(){
         recyclerView = findViewById(R.id.rvPopularMovie)
+        recyclerViewUpcoming = findViewById(R.id.rvUpcomingMovie)
         linearLayoutManager = LinearLayoutManager(this)
         linearLayoutManager.orientation = LinearLayoutManager.HORIZONTAL
+        linearLayoutManager1 = LinearLayoutManager(this)
+        linearLayoutManager1.orientation = LinearLayoutManager.HORIZONTAL
+
         recyclerView.layoutManager = linearLayoutManager
         recyclerView.isNestedScrollingEnabled = true
         recyclerView.setHasFixedSize(true)
 
+        recyclerViewUpcoming.layoutManager = linearLayoutManager1
+        recyclerViewUpcoming.isNestedScrollingEnabled = true
+        recyclerViewUpcoming.setHasFixedSize(true)
+
         progressBar = findViewById(R.id.mainProgressBar)
     }
     private fun setupViewModel() {
-        myViewModel.getListPopularMovie(page)
+        // Setup Trending Movie Recycle View
+        myViewModel.getListPopularMovie(pagePopular)
         myViewModel.getListPopularMovie.observe(this, Observer {
-            list.addAll(it.results)
+            listPupularMovie.addAll(it.results)
             recyclerView.adapter!!.notifyDataSetChanged()
         })
-        adapterView = PopularMovieAdapter(this@MainActivity,list, this)
-        limit = adapterView.itemCount
-        recyclerView.adapter = adapterView
+        adapterPopularMovieView = PopularMovieAdapter(this@MainActivity,listPupularMovie, this)
+        recyclerView.adapter = adapterPopularMovieView
 
 
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -57,12 +74,39 @@ class MainActivity : AppCompatActivity() {
 //                if (dx > 0) {
                 val visibleItemCount = linearLayoutManager.childCount
                 val pastVisibleItem = linearLayoutManager.findFirstCompletelyVisibleItemPosition()
-                val total = adapterView.itemCount
-                if (isLoading) {
+                val total = adapterPopularMovieView.itemCount
+                if (popularIsLoading) {
                     if ((visibleItemCount + pastVisibleItem) >= total) {
-                        page += 1
-                        getPage()
-                        isLoading = false
+                        pagePopular += 1
+                        getPupularPage()
+                        popularIsLoading = false
+                    }
+                }
+//              }
+                super.onScrolled(recyclerView, dx, dy)
+            }
+        })
+        // Setup Upcoming Movie Recycle View
+
+        myViewModel.getListUpComingMovie(pageUpcoming)
+        myViewModel.getListUpComingMovie.observe(this, Observer {
+            listUpcomingMovie.addAll(it.results)
+            recyclerViewUpcoming.adapter!!.notifyDataSetChanged()
+        })
+        adapterUpcomingMovieView = UpComingMovieAdapter(this@MainActivity,listUpcomingMovie, this)
+        recyclerViewUpcoming.adapter = adapterUpcomingMovieView
+
+        recyclerViewUpcoming.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+//                if (dx > 0) {
+                val visibleItemCount = linearLayoutManager1.childCount
+                val pastVisibleItem = linearLayoutManager1.findFirstCompletelyVisibleItemPosition()
+                val total = adapterUpcomingMovieView.itemCount
+                if (upComingIsLoading) {
+                    if ((visibleItemCount + pastVisibleItem) >= total) {
+                        pagePopular += 1
+                        getUpcomingPage()
+                        upComingIsLoading = false
                     }
                 }
 //              }
@@ -71,14 +115,25 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    fun getPage() {
-        isLoading = true
+    fun getPupularPage() {
+        popularIsLoading = true
         progressBar.visibility = View.VISIBLE
         Handler().postDelayed({
-                myViewModel.getListPopularMovie(page)
+                myViewModel.getListPopularMovie(pagePopular)
             progressBar.visibility = View.GONE
 
-            isLoading = true
+            popularIsLoading = true
+        }, 1200)
+    }
+
+    fun getUpcomingPage() {
+        upComingIsLoading = true
+        mainProgressBarUpcoming.visibility = View.VISIBLE
+        Handler().postDelayed({
+            myViewModel.getListUpComingMovie(pageUpcoming)
+            mainProgressBarUpcoming.visibility = View.GONE
+
+            upComingIsLoading = true
         }, 1200)
     }
 }

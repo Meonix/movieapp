@@ -1,18 +1,16 @@
-package com.nice.myapplication
+package com.nice.myapplication.view.adapter
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.viewpager.widget.PagerAdapter
-import androidx.viewpager.widget.ViewPager
 import com.squareup.okhttp.OkHttpClient
 import com.squareup.picasso.OkHttpDownloader
 import com.squareup.picasso.Picasso
-import androidx.annotation.NonNull
 import com.nice.app_ex.data.api.POSTER_BASE_URL
+import com.nice.myapplication.R
 import com.nice.myapplication.model.Backdrop
 
 
@@ -31,7 +29,7 @@ class SlidePagerAdapter(context: Context,list: MutableList<Backdrop>) : PagerAda
         picasso = Picasso.Builder(mContext)
             .downloader(OkHttpDownloader(okHttpClient))
             .build()
-        picasso.load(POSTER_BASE_URL+mList[position].filePath).into(slideImage)
+        picasso.load(POSTER_BASE_URL + mList[position].filePath).into(slideImage)
 
 
         container.addView(slideLayout)

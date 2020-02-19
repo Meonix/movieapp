@@ -1,20 +1,19 @@
 package com.nice.myapplication.view
 
 import android.annotation.SuppressLint
-import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.widget.Toolbar
-import androidx.core.view.size
+import androidx.core.widget.doOnTextChanged
 import androidx.lifecycle.Observer
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.appbar.CollapsingToolbarLayout
-import com.nice.app_ex.data.api.POSTER_BASE_URL
 import com.nice.myapplication.R
-import com.nice.myapplication.SlidePagerAdapter
+import com.nice.myapplication.view.adapter.SlidePagerAdapter
 import com.nice.myapplication.model.Backdrop
 import com.nice.myapplication.viewModel.MainViewModel
 import com.squareup.okhttp.OkHttpClient
@@ -22,7 +21,6 @@ import com.squareup.picasso.OkHttpDownloader
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_movie_detail.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.io.Console
 import kotlin.concurrent.fixedRateTimer
 
 class MovieDetail : AppCompatActivity() {
@@ -73,7 +71,8 @@ class MovieDetail : AppCompatActivity() {
         myViewModel.getListImageMovie(movie_id.toInt())
         myViewModel.getListImageMovie.observe(this, Observer {
             listSlides.addAll(it.backdrops)
-            slidePagerAdapter = SlidePagerAdapter(this,listSlides)
+            slidePagerAdapter =
+                SlidePagerAdapter(this, listSlides)
             slidePager.adapter = slidePagerAdapter
 
             tlMovieDetail.setupWithViewPager(slidePager,true)

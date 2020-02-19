@@ -4,7 +4,6 @@ import com.nice.app_ex.data.api.Api
 import com.nice.app_ex.domain.base.Response
 import com.nice.app_ex.domain.base.ResponseError
 import com.nice.myapplication.model.ListImage
-import com.nice.myapplication.model.ListPopularMovie
 
 class ListImageRepo (private val mApi: Api) {
     suspend fun getListImage(movie_id: Int): Response<ListImage> {

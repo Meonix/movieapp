@@ -2,4 +2,5 @@
     <string name="app_name">Mionix Movie Base</string>
     <string name="movies">Movies</string>
     <string name="trending">Trending</string>
+    <string name="upcoming">UpComing</string>
 </resources>

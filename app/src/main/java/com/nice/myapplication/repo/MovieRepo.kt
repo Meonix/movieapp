@@ -3,7 +3,6 @@ package com.nice.myapplication.repo
 import com.nice.app_ex.data.api.Api
 import com.nice.app_ex.domain.base.Response
 import com.nice.app_ex.domain.base.ResponseError
-import com.nice.myapplication.model.ListPopularMovie
 import com.nice.myapplication.model.Movie
 
 class MovieRepo (private val mApi: Api){
